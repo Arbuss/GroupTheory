@@ -3,7 +3,6 @@ package Arthur;
 import Matrix.*;
 
 public class Main {
-    public static int size;
 
     public static Matrix mtrIncrement(Matrix mtr){
         mtr.increment(3);
@@ -22,22 +21,20 @@ public class Main {
 
     public static MatrixArray getAllMatrixNonNullDet(int field){
         MatrixArray mtrArr = new MatrixArray();
-        size = 0;
         Matrix prevMtr = new Matrix2x2(field);
 
         for(int z = 0; z < Math.pow(field, 4); z++){
             Matrix newMtr = mtrIncrement(prevMtr);
             prevMtr = newMtr;
-            if(newMtr.getDeterminant() != 0) {
+            if(Field.getNum(newMtr.getDeterminant(), newMtr.getField()) != 0) {
                 mtrArr.add(newMtr);
-                size++;
             }
         }
         return mtrArr;
     }
 
     public static void main(String[] args){
-        int field = 41;
+        int field = 3;
         MatrixArray mtrArray = getAllMatrixNonNullDet(field);
 
         System.out.println((int)Math.pow(field, 4) + ": " +mtrArray.getSize());
